@@ -1,151 +1,171 @@
-import React, { useState } from 'react';
-import { Calculator } from 'lucide-react';
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculateur de Dosage Finastéride Topique</title>
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script type="text/babel">
+        const { useState } = React;
 
-export default function FinasterideCalculator() {
-  const [minoxPerApp, setMinoxPerApp] = useState(1);
-  const [finaDosePerDay, setFinaDosePerDay] = useState(1);
-  const [appsPerDay, setAppsPerDay] = useState(2);
-  const [finaConcentration, setFinaConcentration] = useState(0.2);
-  const [bottleSize, setBottleSize] = useState(60);
+        function FinasterideCalculator() {
+          const [minoxPerApp, setMinoxPerApp] = useState(1);
+          const [finaDosePerDay, setFinaDosePerDay] = useState(1);
+          const [appsPerDay, setAppsPerDay] = useState(2);
+          const [finaConcentration, setFinaConcentration] = useState(0.2);
+          const [bottleSize, setBottleSize] = useState(60);
 
-  // Calculs
-  const finaMgPerMl = finaConcentration * 10; // 0.2% = 2mg/ml
-  const totalMinoxPerDay = minoxPerApp * appsPerDay;
-  const finaPerApp = finaDosePerDay / appsPerDay;
-  const finaConcentrationNeeded = finaPerApp / minoxPerApp;
-  const totalApplications = bottleSize / minoxPerApp;
-  const totalFinaNeeded = finaDosePerDay * (totalApplications / appsPerDay);
-  const mlFinaToAdd = totalFinaNeeded / finaMgPerMl;
-  const finalConcentration = (totalFinaNeeded / bottleSize).toFixed(3);
+          const finaMgPerMl = finaConcentration * 10;
+          const totalMinoxPerDay = minoxPerApp * appsPerDay;
+          const finaPerApp = finaDosePerDay / appsPerDay;
+          const totalApplications = bottleSize / minoxPerApp;
+          const totalFinaNeeded = finaDosePerDay * (totalApplications / appsPerDay);
+          const mlFinaToAdd = totalFinaNeeded / finaMgPerMl;
+          const finalConcentration = (totalFinaNeeded / bottleSize).toFixed(3);
 
-  return (
-    <div className="max-w-4xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg">
-      <div className="flex items-center gap-3 mb-6">
-        <Calculator className="w-8 h-8 text-indigo-600" />
-        <h1 className="text-2xl font-bold text-gray-800">
-          Calculateur de Dosage Finastéride Topique
-        </h1>
-      </div>
+          return (
+            <div className="max-w-4xl mx-auto p-6 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-lg shadow-lg mt-8">
+              <div className="flex items-center gap-3 mb-6">
+                <svg className="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+                <h1 className="text-2xl font-bold text-gray-800">
+                  Calculateur de Dosage Finastéride Topique
+                </h1>
+              </div>
 
-      <div className="bg-white rounded-lg p-6 shadow-md mb-6">
-        <h2 className="text-lg font-semibold text-gray-700 mb-4">
-          Paramètres d'Application
-        </h2>
-        
-        <div className="grid md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Volume de minoxidil par application (ml)
-            </label>
-            <input
-              type="number"
-              step="0.1"
-              value={minoxPerApp}
-              onChange={(e) => setMinoxPerApp(parseFloat(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
+              <div className="bg-white rounded-lg p-6 shadow-md mb-6">
+                <h2 className="text-lg font-semibold text-gray-700 mb-4">
+                  Paramètres d'Application
+                </h2>
+                
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Volume de minoxidil par application (ml)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={minoxPerApp}
+                      onChange={(e) => setMinoxPerApp(parseFloat(e.target.value) || 0)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                  </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Nombre d'applications par jour
-            </label>
-            <input
-              type="number"
-              value={appsPerDay}
-              onChange={(e) => setAppsPerDay(parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Nombre d'applications par jour
+                    </label>
+                    <input
+                      type="number"
+                      value={appsPerDay}
+                      onChange={(e) => setAppsPerDay(parseInt(e.target.value) || 0)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                  </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Dose de finastéride souhaitée par jour (mg)
-            </label>
-            <input
-              type="number"
-              step="0.1"
-              value={finaDosePerDay}
-              onChange={(e) => setFinaDosePerDay(parseFloat(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Dose de finastéride souhaitée par jour (mg)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={finaDosePerDay}
+                      onChange={(e) => setFinaDosePerDay(parseFloat(e.target.value) || 0)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                  </div>
 
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Taille du flacon de minoxidil (ml)
-            </label>
-            <input
-              type="number"
-              value={bottleSize}
-              onChange={(e) => setBottleSize(parseInt(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-          </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Taille du flacon de minoxidil (ml)
+                    </label>
+                    <input
+                      type="number"
+                      value={bottleSize}
+                      onChange={(e) => setBottleSize(parseInt(e.target.value) || 0)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                  </div>
 
-          <div className="md:col-span-2">
-            <label className="block text-sm font-medium text-gray-700 mb-2">
-              Concentration du finastéride à mélanger (%)
-            </label>
-            <input
-              type="number"
-              step="0.01"
-              value={finaConcentration}
-              onChange={(e) => setFinaConcentration(parseFloat(e.target.value) || 0)}
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
-            />
-            <p className="text-xs text-gray-500 mt-1">
-              Note : 0.2% = 2 mg/ml
-            </p>
-          </div>
-        </div>
-      </div>
+                  <div className="md:col-span-2">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Concentration du finastéride à mélanger (%)
+                    </label>
+                    <input
+                      type="number"
+                      step="0.01"
+                      value={finaConcentration}
+                      onChange={(e) => setFinaConcentration(parseFloat(e.target.value) || 0)}
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    />
+                    <p className="text-xs text-gray-500 mt-1">
+                      Note : 0.2% = 2 mg/ml
+                    </p>
+                  </div>
+                </div>
+              </div>
 
-      <div className="bg-indigo-600 text-white rounded-lg p-6 shadow-md">
-        <h2 className="text-xl font-bold mb-4">Résultat</h2>
-        
-        <div className="bg-white/10 rounded-lg p-4 mb-4">
-          <p className="text-3xl font-bold text-center">
-            {mlFinaToAdd.toFixed(2)} ml
-          </p>
-          <p className="text-center text-sm mt-2">
-            de solution de finastéride à {finaConcentration}% à ajouter dans votre flacon de {bottleSize} ml de minoxidil
-          </p>
-        </div>
+              <div className="bg-indigo-600 text-white rounded-lg p-6 shadow-md">
+                <h2 className="text-xl font-bold mb-4">Résultat</h2>
+                
+                <div className="bg-white/10 rounded-lg p-4 mb-4">
+                  <p className="text-3xl font-bold text-center">
+                    {mlFinaToAdd.toFixed(2)} ml
+                  </p>
+                  <p className="text-center text-sm mt-2">
+                    de solution de finastéride à {finaConcentration}% à ajouter dans votre flacon de {bottleSize} ml de minoxidil
+                  </p>
+                </div>
 
-        <div className="space-y-3 text-sm">
-          <div className="flex justify-between border-b border-white/20 pb-2">
-            <span>Finastéride par application :</span>
-            <span className="font-semibold">{finaPerApp.toFixed(2)} mg</span>
-          </div>
-          <div className="flex justify-between border-b border-white/20 pb-2">
-            <span>Finastéride total par jour :</span>
-            <span className="font-semibold">{finaDosePerDay} mg</span>
-          </div>
-          <div className="flex justify-between border-b border-white/20 pb-2">
-            <span>Minoxidil total par jour :</span>
-            <span className="font-semibold">{totalMinoxPerDay} ml</span>
-          </div>
-          <div className="flex justify-between border-b border-white/20 pb-2">
-            <span>Concentration finale :</span>
-            <span className="font-semibold">{finalConcentration} mg/ml ({(parseFloat(finalConcentration) / 10).toFixed(3)}%)</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Nombre d'applications (flacon complet) :</span>
-            <span className="font-semibold">{totalApplications.toFixed(0)}</span>
-          </div>
-        </div>
-      </div>
+                <div className="space-y-3 text-sm">
+                  <div className="flex justify-between border-b border-white/20 pb-2">
+                    <span>Finastéride par application :</span>
+                    <span className="font-semibold">{finaPerApp.toFixed(2)} mg</span>
+                  </div>
+                  <div className="flex justify-between border-b border-white/20 pb-2">
+                    <span>Finastéride total par jour :</span>
+                    <span className="font-semibold">{finaDosePerDay} mg</span>
+                  </div>
+                  <div className="flex justify-between border-b border-white/20 pb-2">
+                    <span>Minoxidil total par jour :</span>
+                    <span className="font-semibold">{totalMinoxPerDay} ml</span>
+                  </div>
+                  <div className="flex justify-between border-b border-white/20 pb-2">
+                    <span>Concentration finale :</span>
+                    <span className="font-semibold">{finalConcentration} mg/ml ({(parseFloat(finalConcentration) / 10).toFixed(3)}%)</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Nombre d'applications (flacon complet) :</span>
+                    <span className="font-semibold">{totalApplications.toFixed(0)}</span>
+                  </div>
+                </div>
+              </div>
 
-      <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
-        <h3 className="font-semibold text-yellow-800 mb-2">Instructions</h3>
-        <ol className="text-sm text-yellow-700 space-y-1 list-decimal list-inside">
-          <li>Versez {mlFinaToAdd.toFixed(2)} ml de finastéride {finaConcentration}% dans un flacon vide</li>
-          <li>Complétez avec du minoxidil liquide jusqu'à atteindre {bottleSize} ml au total</li>
-          <li>Agitez bien le flacon avant chaque utilisation</li>
-          <li>Appliquez {minoxPerApp} ml de ce mélange {appsPerDay} fois par jour</li>
-        </ol>
-      </div>
-    </div>
-  );
-}
+              <div className="mt-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded">
+                <h3 className="font-semibold text-yellow-800 mb-2">Instructions</h3>
+                <ol className="text-sm text-yellow-700 space-y-1 list-decimal list-inside">
+                  <li>Versez {mlFinaToAdd.toFixed(2)} ml de finastéride {finaConcentration}% dans un flacon vide</li>
+                  <li>Complétez avec du minoxidil liquide jusqu'à atteindre {bottleSize} ml au total</li>
+                  <li>Agitez bien le flacon avant chaque utilisation</li>
+                  <li>Appliquez {minoxPerApp} ml de ce mélange {appsPerDay} fois par jour</li>
+                </ol>
+              </div>
+            </div>
+          );
+        }
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<FinasterideCalculator />);
+    </script>
+</body>
+</html>
